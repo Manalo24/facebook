@@ -4,8 +4,9 @@ public class amici {
 	int max=0;
 	Scanner sc = new Scanner(System.in);
 	private int tag = 0;
+	private int save=0;
 	private boolean amicoSi = false;
-	private int[] numCount = new int[4];
+	private int[] numCount = new int[100];
 	private int cont = 0;
 	private int fotoNum = 0;
 	private int friend = 0;
@@ -112,7 +113,7 @@ public class amici {
 		System.out.println("Hai scelto " + arrayFriends[friend]);
 		System.out.println("Scegli da questa lista");
 		photoObject.getArray();
-		while (fotoNum != 99 && cont < photoObject.indiceFoto) {
+		while (fotoNum != 99 && numCount[friend] < photoObject.indiceFoto) {
 			System.out.println("Scegli numero della foto");
 			System.out.println("Inserire 99 se non vuoi piu inserire");
 			fotoNum = sc.nextInt();
@@ -120,13 +121,13 @@ public class amici {
 			if (fotoNum != 99 && fotoNum < photoObject.indiceFoto) {
 				System.out.println(
 						"La foto " + photoObject.arrayFoto[fotoNum] + " è stato associato a " + arrayFriends[friend]);
-				cont++;
-				numCount[friend] = cont;
+				//cont++;
+				numCount[friend]++;
 			} else {
 				System.out.println("La foto scelta non è disponibile");
 			}
 		}
-		cont = 0;
+		//cont = 0;
 		fotoNum = 0;
 
 	}
@@ -142,18 +143,13 @@ public class amici {
 	}
 	public void max() {
 		for (int p = 0; p < indice;p++) {
-			if (numCount[p]>numCount[p+1]) {
+			if (numCount[p]>max) {
 				max=numCount[p];
+				save=p;
 				
-			} else {
-				max = numCount[p+1];
-				
-			} 
-			/*if (max1>max) {
-				max=max1;
-			}*/
+			}
 		}
-		System.out.println(" "+max);
+		System.out.println("L'amico piu taggato è " + arrayFriends[save] +" con " + max+" foto ");
 		
 	}
 }
